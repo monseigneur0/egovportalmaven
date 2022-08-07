@@ -1,4 +1,4 @@
-package egovframework.let.book.web;
+package egovframework.let.bookrepo.web;
 
 import egovframework.let.book.service.BookService;
 import org.slf4j.Logger;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/repo")
 public class BookController {
 
     private Logger log = LoggerFactory.getLogger(getClass());

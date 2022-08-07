@@ -14,7 +14,7 @@
             select
             title, category, price, insert_date
             from board
-            where board_id = #{boardId}
+            where board_id = #{board_id}
         ]]>
     </select>
     <update id="update" parameterType="hashMap">

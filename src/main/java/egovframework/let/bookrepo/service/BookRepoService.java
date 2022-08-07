@@ -1,11 +1,9 @@
-package egovframework.let.book.service;
-
-import egovframework.let.boardSys.service.BoardSys;
+package egovframework.let.bookrepo.service;
 
 import java.util.List;
 import java.util.Map;
 
-public interface BookService {
+public interface BookRepoService {
     String create(Map<String, Object> map);
 
     Map<String, Object> detail(Map<String, Object> map);

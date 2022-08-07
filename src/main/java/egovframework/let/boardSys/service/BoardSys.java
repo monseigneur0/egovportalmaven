@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class BoardSys implements Serializable {
 
-
     private Long board_id;
     private String title;
     private String category;
