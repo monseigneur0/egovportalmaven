@@ -5,14 +5,14 @@ import java.util.Map;
 
 public interface BoardSysService {
 
-    String create(Map<String, Object> map);
+    String create(BoardSys boardSys);
 
-    Map<String, Object> detail(Map<String, Object> map);
+    Map<String, Object> detail(BoardSys boardSys);
 
 
-    boolean edit(Map<String, Object> map);
+    boolean edit(BoardSys boardSys);
 
-    boolean remove(Map<String, Object> map);
+    boolean remove(BoardSys boardSys);
 
-    List<Map<String, Object>> list(Map<String, Object> map);
+    List<Map<String, Object>> list(BoardSys boardSys);
 }
