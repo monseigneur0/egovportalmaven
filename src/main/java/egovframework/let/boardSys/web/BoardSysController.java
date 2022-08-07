@@ -1,5 +1,6 @@
 package egovframework.let.boardSys.web;
 
+import egovframework.let.boardSys.service.BoardSys;
 import egovframework.let.boardSys.service.BoardSysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,35 +25,35 @@ public class BoardSysController {
     }
 
     @RequestMapping(value = "boardcreate.do", method = RequestMethod.POST)
-    public String createPost(@RequestParam Map<String, Object> map) {
+    public String createPost(BoardSys boardSys) {
 
-        String boardId = this.boardSysService.create(map);
+        String boardId = this.boardSysService.create(boardSys);
         return "redirect:/boarddetail.do?boardId=" + boardId;
     }
 
     @RequestMapping(value = "detailnew.do", method = RequestMethod.GET)
-    public String detail(@RequestParam Map<String, Object> map, Model model) {
-        Map<String, Object> detailMap = this.boardSysService.detail(map);
+    public String detail(BoardSys boardSys, Model model) {
+        Map<String, Object> detailMap = this.boardSysService.detail(boardSys);
 
         model.addAttribute("detailMap", detailMap);
         return "boardSys/detail";
     }
 
     @RequestMapping(value = "boarddetail.do", method = RequestMethod.GET)
-    public ModelAndView detail(@RequestParam Map<String, Object> map) {
-        Map<String, Object> detailMap = this.boardSysService.detail(map);
+    public ModelAndView detail(BoardSys boardSys) {
+        Map<String, Object> detailMap = this.boardSysService.detail(boardSys);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("data", detailMap);
-        String boardId = map.get("boardId").toString();
+        String boardId = boardSys.getBoard_id().toString();
         mav.addObject("boardId", boardId);
         mav.setViewName("boardSys/detail");
         return mav;
     }
 
     @RequestMapping(value = "/boardupdate.do", method = RequestMethod.GET)
-    public ModelAndView update(@RequestParam Map<String, Object> map) {
-        Map<String, Object> detailMap = this.boardSysService.detail(map);
+    public ModelAndView update(BoardSys boardSys) {
+        Map<String, Object> detailMap = this.boardSysService.detail(boardSys);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("data", detailMap);
@@ -60,43 +61,43 @@ public class BoardSysController {
         return mav;
     }
     @RequestMapping(value = "boardupdate.do", method = RequestMethod.POST)
-    public ModelAndView updatePost(@RequestParam Map<String, Object> map) {
+    public ModelAndView updatePost(BoardSys boardSys) {
         ModelAndView mav = new ModelAndView();
 
-        boolean isUpdateSuccess = this.boardSysService.edit(map);
+        boolean isUpdateSuccess = this.boardSysService.edit(boardSys);
         if (isUpdateSuccess) {
-            String boardId = map.get("boardId").toString();
+            String boardId = boardSys.getBoard_id().toString();
             mav.setViewName("redirect:/boarddetail.do?boardId=" + boardId);
         }else {
-            mav = this.update(map);
+            mav = this.update(boardSys);
         }
 
         return mav;
     }
 
     @RequestMapping(value = "/boarddelete.do", method = RequestMethod.POST)
-    public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
+    public ModelAndView deletePost(BoardSys boardSys) {
         ModelAndView mav = new ModelAndView();
 
-        boolean isDeleteSuccess = this.boardSysService.remove(map);
+        boolean isDeleteSuccess = this.boardSysService.remove(boardSys);
         if (isDeleteSuccess) {
             mav.setViewName("redirect:/boardlist.do");
         }else {
-            String boardId = map.get("boardId").toString();
+            String boardId = boardSys.getBoard_id().toString();
             mav.setViewName("redirect:/boarddetail.do?boardId=" + boardId);
         }
         return mav;
     }
 
     @RequestMapping(value = "boardlist.do")
-    public ModelAndView list(@RequestParam Map<String, Object> map) {
+    public ModelAndView list(BoardSys boardSys) {
 
-        List<Map<String, Object>> list = this.boardSysService.list(map);
+        List<Map<String, Object>> list = this.boardSysService.list(boardSys);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("data", list);
-        if (map.containsKey("keyword")) {
-            mav.addObject("keyword", map.get("keyword"));
+        if (!boardSys.getKeyword().equals("")) {
+            mav.addObject("keyword", boardSys.getKeyword());
         }
         mav.setViewName("/boardSys/list");
         return mav;
