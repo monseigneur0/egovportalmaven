@@ -12,14 +12,14 @@
 <p>입력일 : <fmt:formatDate value="${data.insert_date}" pattern="yyyy.MM.dd HH:mm:ss" /></p>
 
 <p>
-    <a href="/boardupdate.do?boardId=${boardId}">수정</a>
+    <a href="/board/update.do?boardId=${boardId}">수정</a>
 </p>
-<form method="POST" action="/boarddelete.do">
+<form method="POST" action="/board/delete.do">
     <input type="hidden" name="boardId" value="${boardId}" />
     <input type="submit" value="삭제" />
 </form>
 <p>
-    <a href="/boardlist.do">목록으로</a>
+    <a href="/board/list.do">목록으로</a>
 </p>
 </body>
 </html>

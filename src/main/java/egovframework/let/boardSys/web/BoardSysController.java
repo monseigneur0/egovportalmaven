@@ -16,25 +16,26 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/board")
 public class BoardSysController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     BoardSysService boardSysService;
 
-    @RequestMapping(value = "boardcreate.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/create.do", method = RequestMethod.GET)
     public String create() {
         return "boardSys/create";
     }
 
-    @RequestMapping(value = "boardcreate.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/create.do", method = RequestMethod.POST)
     public String createPost(BoardSys boardSys) {
 
         String boardId = this.boardSysService.create(boardSys);
         return "redirect:/boarddetail.do?boardId=" + boardId;
     }
 
-    @RequestMapping(value = "boarddetail.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail.do", method = RequestMethod.GET)
     public String detail(BoardSys boardSys, Model model,String boardId) {
         log.debug("==========================");
         log.debug(boardId);
@@ -51,7 +52,7 @@ public class BoardSysController {
         return "boardSys/detail";
     }
 
-    @RequestMapping(value = "/boardupdate.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/update.do", method = RequestMethod.GET)
     public String update(BoardSys boardSys,Model model,String boardId) {
         boardSys.setBoard_id(Long.valueOf(boardId));
         Map<String, Object> detailMap = this.boardSysService.detail(boardSys);
@@ -59,7 +60,7 @@ public class BoardSysController {
         model.addAttribute("data", detailMap);
         return "/boardSys/update";
     }
-    @RequestMapping(value = "boardupdate.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/update.do", method = RequestMethod.POST)
     public String updatePost(BoardSys boardSys, Model model) {
 
         boolean isUpdateSuccess = this.boardSysService.edit(boardSys);
@@ -74,7 +75,7 @@ public class BoardSysController {
 
     }
 
-    @RequestMapping(value = "/boarddelete.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete.do", method = RequestMethod.POST)
     public String deletePost(BoardSys boardSys, Model model,String boardId) {
         model.addAttribute("boardId", boardId);
         boardSys.setBoard_id(Long.valueOf(boardId));
@@ -91,7 +92,7 @@ public class BoardSysController {
         }
     }
 
-    @RequestMapping(value = "boardlist.do")
+    @RequestMapping(value = "/list.do")
     public String list(BoardSys boardSys,Model model) {
         List<Map<String, Object>> list = this.boardSysService.list(boardSys);
         model.addAttribute("data",list);

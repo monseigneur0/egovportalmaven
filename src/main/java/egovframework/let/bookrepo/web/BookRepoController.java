@@ -1,6 +1,6 @@
 package egovframework.let.bookrepo.web;
 
-import egovframework.let.book.service.BookService;
+import egovframework.let.bookrepo.service.BookRepoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class BookRepoController {
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    BookService bookService;
+    BookRepoService bookRepoService;
 
     @RequestMapping(value="/create.do", method = RequestMethod.GET)
     public ModelAndView create() {
@@ -31,7 +31,7 @@ public class BookRepoController {
     public ModelAndView createPost(@RequestParam Map<String, Object> map) {
         ModelAndView mav = new ModelAndView();
 
-        String bookId = this.bookService.create(map);
+        String bookId = this.bookRepoService.create(map);
         if (bookId == null) {
             mav.setViewName("redirect:/create.do");
         }else {
@@ -45,7 +45,7 @@ public class BookRepoController {
     public ModelAndView detail(@RequestParam Map<String, Object> map) {
         log.debug("==========================");
         log.debug(String.valueOf(map));
-        Map<String, Object> detailMap = this.bookService.detail(map);
+        Map<String, Object> detailMap = this.bookRepoService.detail(map);
         log.info(String.valueOf(detailMap));
 
         ModelAndView mav = new ModelAndView();
@@ -59,7 +59,7 @@ public class BookRepoController {
 
     @RequestMapping(value = "/update.do", method = RequestMethod.GET)
     public ModelAndView update(@RequestParam Map<String, Object> map) {
-        Map<String, Object> detailMap = this.bookService.detail(map);
+        Map<String, Object> detailMap = this.bookRepoService.detail(map);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("data", detailMap);
@@ -70,7 +70,7 @@ public class BookRepoController {
     public ModelAndView updatePost(@RequestParam Map<String, Object> map) {
         ModelAndView mav = new ModelAndView();
 
-        boolean isUpdateSuccess = this.bookService.edit(map);
+        boolean isUpdateSuccess = this.bookRepoService.edit(map);
         if (isUpdateSuccess) {
             String bookId = map.get("bookId").toString();
             mav.setViewName("redirect:/detail?bookId=" + bookId);
@@ -85,7 +85,7 @@ public class BookRepoController {
     public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
         ModelAndView mav = new ModelAndView();
 
-        boolean isDeleteSuccess = this.bookService.remove(map);
+        boolean isDeleteSuccess = this.bookRepoService.remove(map);
         if (isDeleteSuccess) {
             mav.setViewName("redirect:/list.do");
         }else {
@@ -98,7 +98,7 @@ public class BookRepoController {
     @RequestMapping(value = "list.do")
     public ModelAndView list(@RequestParam Map<String, Object> map) {
 
-        List<Map<String, Object>> list = this.bookService.list(map);
+        List<Map<String, Object>> list = this.bookRepoService.list(map);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("data", list);

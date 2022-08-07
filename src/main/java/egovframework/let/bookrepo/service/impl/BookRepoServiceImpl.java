@@ -1,6 +1,6 @@
 package egovframework.let.bookrepo.service.impl;
 
-import egovframework.let.book.service.BookService;
+import egovframework.let.bookrepo.service.BookRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class BookRepoServiceImpl implements BookService {
+public class BookRepoServiceImpl implements BookRepoService {
 
     @Autowired
     BookRepoDAO bookDao;
