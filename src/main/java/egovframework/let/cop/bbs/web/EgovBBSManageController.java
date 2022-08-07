@@ -120,7 +120,7 @@ public class EgovBBSManageController {
 	 */
 	@RequestMapping("/cop/bbs/selectBoardList.do")
 	public String selectBoardArticles(@ModelAttribute("searchVO") BoardVO boardVO, ModelMap model, HttpServletRequest request) throws Exception {
-		System.out.println(boardVO.getBbsId());
+		System.out.println("boardVO.getBbsId() = "+ boardVO.getBbsId());
 		// 메인화면에서 넘어온 경우 메뉴 갱신을 위해 추가
 		request.getSession().setAttribute("menuNo", "3000000");
 		
@@ -181,7 +181,7 @@ public class EgovBBSManageController {
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("brdMstrVO", master);
 		model.addAttribute("paginationInfo", paginationInfo);
-		
+		System.out.println("boardVO = " + boardVO);
 		return "cop/bbs/EgovNoticeList";
 	}
 
