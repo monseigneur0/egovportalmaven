@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class BookDAO {
+public class BookRepoDAO {
 
     @Autowired
     SqlSessionTemplate sqlSessionTemplate;

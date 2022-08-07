@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/repo")
-public class BookController {
+public class BookRepoController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 

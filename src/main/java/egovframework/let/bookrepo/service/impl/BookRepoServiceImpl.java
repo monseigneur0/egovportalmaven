@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class BookRepoServiceImpl implements BookService {
 
     @Autowired
-    BookDAO bookDao;
+    BookRepoDAO bookDao;
 
     @Override
     public String create(Map<String, Object> map) {
