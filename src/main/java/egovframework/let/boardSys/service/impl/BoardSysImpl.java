@@ -1,6 +1,5 @@
 package egovframework.let.boardSys.service.impl;
 
-import egovframework.let.boardSys.service.BoardSys;
 import egovframework.let.boardSys.service.BoardSysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,32 +14,32 @@ public class BoardSysImpl implements BoardSysService {
     BoardSysDao boardSysDao;
 
     @Override
-    public String create(BoardSys boardSys) {
-        int affectRowCount = this.boardSysDao.insert(boardSys);
+    public String create(Map<String, Object> map) {
+        int affectRowCount = this.boardSysDao.insert(map);
         if (affectRowCount == 1) {
-            return boardSys.getBoard_id().toString();
+            return map.get("board_id").toString();
         }
         return null;
     }
 
     @Override
-    public Map<String, Object> detail(BoardSys boardSys) {
-        return this.boardSysDao.selectDetail(boardSys);
+    public Map<String, Object> detail(Map<String, Object> map) {
+        return this.boardSysDao.selectDetail(map);
     }
 
     @Override
-    public boolean edit(BoardSys boardSys) {
-        int affectRowCount = this.boardSysDao.update(boardSys);
+    public boolean edit(Map<String, Object> map) {
+        int affectRowCount = this.boardSysDao.update(map);
         return affectRowCount == 1; //1개 행 영향 받은지 검사
     }
     @Override
-    public boolean remove(BoardSys boardSys) {
-        int affectRowCount = this.boardSysDao.delete(boardSys);
+    public boolean remove(Map<String, Object> map) {
+        int affectRowCount = this.boardSysDao.delete(map);
         return affectRowCount == 1;
     }
     @Override
-    public List<Map<String, Object>> list(BoardSys boardSys){
-        return this.boardSysDao.selectList(boardSys);
+    public List<Map<String, Object>> list(Map<String, Object> map){
+        return this.boardSysDao.selectList(map);
     }
 
 }
