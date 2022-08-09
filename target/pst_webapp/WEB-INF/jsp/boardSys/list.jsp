@@ -36,7 +36,7 @@
     </tbody>
 </table>
 <p>
-    <a href="/boardcreate.do">생성</a>
+    <a href="/board/create.do">생성</a>
 </p>
 </body>
 </html>
