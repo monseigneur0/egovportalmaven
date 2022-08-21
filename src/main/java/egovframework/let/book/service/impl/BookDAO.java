@@ -31,5 +31,4 @@ public class BookDAO {
         return this.sqlSessionTemplate.selectList("book.select_list", map);
     }
 
-
 }
