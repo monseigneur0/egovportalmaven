@@ -2,7 +2,7 @@
 .idea/
 */.DS_Store
 target/
-
+.gitignore
 MANIFEST.MF
 # Compiled class file
 *.class
@@ -212,3 +212,4 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,intellij
+target/pst_webapp/META-INF/MANIFEST.MF
